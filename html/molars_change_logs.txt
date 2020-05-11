@@ -1,0 +1,25 @@
+Original_file				change_file			dated
+
+source field update
+required files:
+/var/www/dental_includes/
+access.inc.php
+/var/www/html/dental_b
+index.php
+/var/www/html/patient-contacts
+
+
+========================================================================
+/var/www/dental_include
+dental_includes (with rel/seg) 		dental_includes_24-3-2020		24-3-2020
+
+/var/www/html
+dental_b				dental_b_24-3-2020			24-3-2020
+======================================================================================
+dental_b (with update of ) 		dental_b_24-3-2020			24-3-2020
+dental_include(with update)		dental_include_24-3-2020		24-3-2020
+allocate_patients.php (with update)	allocate_patients_24-3-2020.php		24-3-2020
+search_for_patient_2.php(with update)	search_for_patient_2_24-3-2020.php	24-3-2020
+access.inc.php 				access.inc_24-3-2020.php 		24-3-2020
+
+
