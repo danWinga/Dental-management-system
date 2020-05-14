@@ -667,22 +667,30 @@ var dataProcObj = this;
 //fill_treeview2();
 var loadTree = "";//fill_treeview2();
 
-var treeData = null;
+//var treeData = null;
 
-//var treeData;
-trview();
+var treeData =trview();
+//alert(" response:"+ treeData.length)
+
 function trview(){
 	
+
 	$.ajax({
 		method: "POST",  
 		 url: "dental_procedure_upgrades/dist/treeV.php", 			   
 		 dataType: "json",  
 	   success: function(response){
 		  
-		  treeData = response;
+		   //alert(" response:"+ response)
+		  // alert(" responsell:"+ response.length)
+		  
+		  window.treeData = response;
+		  //alert(" response treedata:"+ treedata);
 		}   
 	  });
+	  	
 	return treeData 
+	
 }
 
 
@@ -701,9 +709,13 @@ $('.procedure_container').on('click', 'input[name^=codex]', function(){
 		var width_x = $('input[name^=codex]').parent().width();
 		var height_y = 580;//$("#employer_form_div").height();
 		
+		//alert("loading 1 :"+ window.treeData);
+		//var loaderx1;
+		var treeData = window.treeData
 		var loaderx1 = fill_treeview3(treeData);
+		//alert("loading 1 :" + loaderx1.length);
 		
-		window.loadTree =loaderx1 
+		//window.loadTree =loaderx1 
 		var action = 'procedure_id';
 		var  action = 'action';
 		var myoutput = 'myOutPut';
@@ -728,8 +740,11 @@ $('.procedure_container').on('click', 'input[name^=codex]', function(){
 									show:true,
 									modal: true,
 									body: function(loaderx1){ // loaderx1
+										
 											window.setTimeout(function(){
+											
 												//loaderx1 = fill_treeview2();
+												//loaderx1 = fill_treeview3(treeData);
 											
 											},2000);
 									}
@@ -800,7 +815,7 @@ function fill_treeview2(query)
 					   // dental_procedure_upgrades/dist/fill_treeview.php
 					   //../dental_includes/procedure_treeview.php
 					   if (node.nodes == undefined) {
-						   alert('Node Undefined');
+						   //alert('Node Undefined');
 					   // sends node info to another element
 					   } else if (node.state.expanded) {
 					   // TODO collapse children 
@@ -859,7 +874,7 @@ function fill_treeview2(query)
 
   function fill_treeview3(treeData)
    {
-	//var treeData = trview();	
+		
 			var tree = $('#treeview2').treeview({
 				   data:treeData,
 				   multiSelect: false,
@@ -886,7 +901,7 @@ function fill_treeview2(query)
 						}
 						else if (node.state.selected){
 													   
-						   alert("node selected"+ node.nodeId +": \n Node text:"+ node.text +": \n Node nodes:"+ node.id+": \n Node code:"+ node.code);
+						   //alert("node selected"+ node.nodeId +": \n Node text:"+ node.text +": \n Node nodes:"+ node.id+": \n Node code:"+ node.code);
 						   //onsole.log('node selected = ' + JSON.stringify(event) + '; data = ' + JSON.stringify(data));
 						  
 						   //window.result_value = node.id;
@@ -2361,11 +2376,9 @@ function update_insurance_card_bal(udpId,new_bal){
 	var action = "update_pt_insurance_card_bal";
 	var selected_upd = udpId;
 	var card_bl = new_bal;
-	alert('insurance_card_balxxx12'+ card_bl );
+	//alert('insurance_card_balxxx12'+ card_bl );
 	var intCard_bl = parseFloat(card_bl);
-	alert('balance float '+ intCard_bl  );
-	//alert('Function call for update_pt_insurance_card_bal'+ udpId );
-	//alert('insurance_card_bal'+ intCard_bl );
+	
 	if(intCard_bl){
 		$("#patient_card_balx").html("");
 		var pid_pt = udpId;
@@ -2376,7 +2389,7 @@ function update_insurance_card_bal(udpId,new_bal){
 			 data: {action:action, selected_upd:selected_upd, card_bl_upd: intCard_bl },
 			 success: function( response){
 				setTimeout(function(){
-					alert('patient insurance card balance updated correctly' + response);
+					//alert('patient insurance card balance updated correctly' + response);
 					$("#patient_card_balx").html("");
 					fill_missing_pt_contact(pid_pt)					
 					fill_pt_bal_status(udpId);										
@@ -2384,7 +2397,7 @@ function update_insurance_card_bal(udpId,new_bal){
 			},
 			complete: function(response){
 				setTimeout(function(){
-					alert('patient allocated correctly complete' + response);
+					//alert('patient allocated correctly complete' + response);
 					fill_pt_bal_status(udpId);	
 					
 				}, 100);
@@ -2470,10 +2483,10 @@ $('#pt_cancel_changes').click(function() {
  
  $('#pt_update_pt_balxxx').on('click', function(e){
 	var thisFormData = $('#patient_card_balx').serialize();
-	alert('text valxx :' );
+	
 	//var card_b1 = $('#card_bal45').val();
 	var card_b2 = $(this).parent().parent().find('#card_bal45').val();
-	alert('insurance_card_bal45'+ card_b2);
+	//alert('insurance_card_bal45'+ card_b2);
 
 
 
@@ -2485,15 +2498,15 @@ $('#pt_cancel_changes').click(function() {
 	var udpId = pbUdpID;
 	var card_b = $(this).parent().parent().find('#card_bal45').val();
 	var  new_bal = card_b;
-	alert('insurance_card_bal45'+ new_bal);
+	
 	if(new_bal){
-		alert('------ on function------'+ new_bal);
+		
 		update_insurance_card_bal(udpId,new_bal)
 
 	}else{
 		alert('error ! kindly update card balance');
 	}
-	//alert('insurance_card_balxxxxxxxvvvvv'+ card_b);
+	
 	
  });
 
@@ -5507,7 +5520,7 @@ $('.procedure_container2').on('click', 'input[name^=codex]', function(){
 					var data = JSON.parse(outputfromserver);
 					dataProcObj= data;
 					//alert("all procedure ids :"+ data);
-					alert("all procedure dataProcObj :"+ dataProcObj[0].id);
+					alert("all procedure dataProcObjxxx :"+ dataProcObj[0].id);
 					sessionedProcedureId(outputfromserver);
 						
 								$('#tst').dialog({
